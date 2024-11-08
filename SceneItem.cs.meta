@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: aa25fee98093bb84fbd1ca16f7a0b1a1
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 156756
+  packageName: Inventory Buddy
+  packageVersion: 1.01
+  assetPath: Assets/IvyMoon/InventoryBuddy/Scripts/Item/SceneItem.cs
+  uploadId: 356950
