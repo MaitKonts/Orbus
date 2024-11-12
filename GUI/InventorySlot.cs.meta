@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 877947eae6cb71b4da3826054d0a596e
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 156756
+  packageName: Inventory Buddy
+  packageVersion: 1.01
+  assetPath: Assets/IvyMoon/InventoryBuddy/Scripts/GUI/InventorySlot.cs
+  uploadId: 356950

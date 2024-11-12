@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 8bc353b64c1b2b9458182bb333505b48
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 156756
+  packageName: Inventory Buddy
+  packageVersion: 1.01
+  assetPath: Assets/IvyMoon/InventoryBuddy/Scripts/GUI/ScrollInfo.cs
+  uploadId: 356950

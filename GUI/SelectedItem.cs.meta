@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: a39901c4bfa05f8479c838243b08e8cb
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 156756
+  packageName: Inventory Buddy
+  packageVersion: 1.01
+  assetPath: Assets/IvyMoon/InventoryBuddy/Scripts/GUI/SelectedItem.cs
+  uploadId: 356950
