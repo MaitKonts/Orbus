@@ -276,72 +276,57 @@ namespace IvyMoon
         }
 
         [ServerRpc(RequireOwnership = false)]
-        private void AttemptAttackServerRpc(ulong targetNetworkObjectId, int damageAmount)
-        {
-            if (NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(targetNetworkObjectId, out var targetObject))
-            {
-                if (targetObject != this.NetworkObject)
-                {
+        private void AttemptAttackServerRpc(ulong targetNetworkObjectId, int damageAmount) {
+            if (NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(targetNetworkObjectId, out var targetObject)) {
+                if (targetObject != this.NetworkObject) {
                     IDamageable damageable = targetObject.GetComponent<IDamageable>();
-                    if (damageable != null)
-                    {
+                    if (damageable != null) {
                         damageable.TakeDamage(damageAmount);
-                    }
-                    else
-                    {
+                    } else {
                         Debug.LogWarning("Target does not implement IDamageable.");
                     }
-                }
-                else
-                {
+                } else {
                     Debug.LogWarning("Cannot damage self.");
                 }
-            }
-            else
-            {
+            } else {
                 Debug.LogWarning("Target object not found on the server.");
             }
         }
 
-        private void AttemptAttack()
-        {
+
+        private void AttemptAttack() {
             InventoryItem selectedItem = GetSelectedHotbarItem();
-            if (selectedItem == null)
-            {
+            if (selectedItem == null) {
                 Debug.LogWarning("No item selected in hotbar.");
                 return;
             }
-
             Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out RaycastHit hit, 4f))
-            {
+            if (Physics.Raycast(ray, out RaycastHit hit, 4f)) {
                 IDamageable damageable = hit.collider.GetComponent<IDamageable>();
                 NetworkObject targetNetworkObject = hit.collider.GetComponent<NetworkObject>();
-
-                if (damageable != null && targetNetworkObject != null && targetNetworkObject.NetworkObjectId != NetworkObject.NetworkObjectId)
-                {
-                    if (damageable is BreakableTree)
-                    {
-                        if (selectedItem.itemName == "Axe")
-                        {
-                            damageable.TakeDamage(selectedItem.damageValue);
-                        }
-                        else
-                        {
+                
+                // Check if the target can be attacked and is not self
+                if (damageable != null && targetNetworkObject != null && 
+                    targetNetworkObject.NetworkObjectId != NetworkObject.NetworkObjectId) {
+                    
+                    // If target is a BreakableTree, ensure an axe is selected
+                    if (damageable is BreakableTree) {
+                        if (selectedItem.itemName == "Axe") {
+                            // Use server RPC to handle damage application on the server
+                            AttemptAttackServerRpc(targetNetworkObject.NetworkObjectId, selectedItem.damageValue);
+                        } else {
                             Debug.LogWarning("An Axe is required to break the tree.");
                         }
+                    } else {
+                        // Attack non-tree objects directly
+                        AttemptAttackServerRpc(targetNetworkObject.NetworkObjectId, selectedItem.damageValue);
                     }
-                    else
-                    {
-                        damageable.TakeDamage(selectedItem.damageValue);
-                    }
-                }
-                else
-                {
+                } else {
                     Debug.LogWarning("Cannot attack self or object is not damageable.");
                 }
             }
         }
+
 
         [ClientRpc]
         private void PlayAttackAnimationClientRpc(int attackIndex)
